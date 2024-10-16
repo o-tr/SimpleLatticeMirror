@@ -13,8 +13,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Set version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
+
       - name: Zip simple_lattice_mirror directory
-        run: zip -r simple_lattice_mirror.zip simple_lattice_mirror
+        run: zip -r simple_lattice_mirror_${{ steps.get_version.outputs.VERSION }}.zip simple_lattice_mirror
 
       - name: Create Release
         id: create_release
@@ -33,6 +37,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./simple_lattice_mirror.zip
-          asset_name: simple_lattice_mirror_${{ github.ref }}.zip
+          asset_path: ./simple_lattice_mirror_${{ steps.get_version.outputs.VERSION }}.zip
+          asset_name: simple_lattice_mirror_${{ steps.get_version.outputs.VERSION }}.zip
           asset_content_type: application/zip
