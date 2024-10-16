@@ -2,12 +2,30 @@ import math, bpy
 
 from . import name
 
-def is_same_point(point1: list[float], point2: list[float]) -> bool:
-    return math.isclose(point1[0], point2[0], abs_tol=bpy.context.preferences.addons[name].preferences.threshold) and \
-            math.isclose(point1[1], point2[1], abs_tol=bpy.context.preferences.addons[name].preferences.threshold) and \
-            math.isclose(point1[2], point2[2], abs_tol=bpy.context.preferences.addons[name].preferences.threshold)
 
-def find_same_point(points: list[list[float]], target_point: list[float]) -> tuple[list[list[float]], list[int]]:
+def is_same_point(point1: list[float], point2: list[float]) -> bool:
+    return (
+        math.isclose(
+            point1[0],
+            point2[0],
+            abs_tol=bpy.context.preferences.addons[name].preferences.threshold,
+        )
+        and math.isclose(
+            point1[1],
+            point2[1],
+            abs_tol=bpy.context.preferences.addons[name].preferences.threshold,
+        )
+        and math.isclose(
+            point1[2],
+            point2[2],
+            abs_tol=bpy.context.preferences.addons[name].preferences.threshold,
+        )
+    )
+
+
+def find_same_point(
+    points: list[list[float]], target_point: list[float]
+) -> tuple[list[list[float]], list[int]]:
     result: list[list[float]] = []
     indexes: list[int] = []
     for index, current_point in enumerate(points):
@@ -18,8 +36,11 @@ def find_same_point(points: list[list[float]], target_point: list[float]) -> tup
 
 
 def find_symmetric_point(lattice: bpy.types.Lattice, axis: str) -> dict[int, list[int]]:
-    selected_points = [[i[0],i[1],i[2]] for i in [p.co_deform.copy() for p in lattice.points if p.select]]
-    points = [[i[0],i[1],i[2]] for i in [p.co_deform.copy() for p in lattice.points]]
+    selected_points = [
+        [i[0], i[1], i[2]]
+        for i in [p.co_deform.copy() for p in lattice.points if p.select]
+    ]
+    points = [[i[0], i[1], i[2]] for i in [p.co_deform.copy() for p in lattice.points]]
     symmetric_map = {}
     for i, point in enumerate(selected_points):
         (_, indexes) = find_same_point(points, convert_to_symmetric_point(point, axis))
@@ -28,12 +49,13 @@ def find_symmetric_point(lattice: bpy.types.Lattice, axis: str) -> dict[int, lis
         symmetric_map[i] = indexes
     return symmetric_map
 
+
 def convert_to_symmetric_point(point: list[float], axis: str) -> list[float]:
-    if axis == 'X':
+    if axis == "X":
         return [-point[0], point[1], point[2]]
-    elif axis == 'Y':
+    elif axis == "Y":
         return [point[0], -point[1], point[2]]
-    elif axis == 'Z':
+    elif axis == "Z":
         return [point[0], point[1], -point[2]]
     else:
         raise ValueError(f"Invalid axis: {axis}")

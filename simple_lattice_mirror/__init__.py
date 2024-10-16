@@ -25,7 +25,7 @@ SOFTWARE.
 bl_info = {
     "name": "Simple Lattice Mirror",
     "author": "ootr",
-    "version": (0,0,3),
+    "version": (0, 0, 3),
     "blender": (3, 0, 0),
     "location": "View3D > Tool Shelf > Item",
     "description": "Applies symmetry to the selected Lattice control points",
@@ -41,6 +41,7 @@ from .SimpleLatticeMirrorPreferences import SimpleLatticeMirrorPreferences
 
 name = __name__
 
+
 def register():
     bpy.utils.register_class(SimpleLatticeMirrorPanel)
     bpy.utils.register_class(SimpleLatticeMirrorPreferences)
@@ -48,21 +49,23 @@ def register():
     bpy.types.Scene.simple_lattice_mirror_axis = bpy.props.EnumProperty(
         name="Axis",
         description="Axis to mirror mirror on",
-        items=[('X', 'X', 'Mirror on the X axis'),
-               ('Y', 'Y', 'Mirror on the Y axis'),
-               ('Z', 'Z', 'Mirror on the Z axis')],
-        default='X'
+        items=[
+            ("X", "X", "Mirror on the X axis"),
+            ("Y", "Y", "Mirror on the Y axis"),
+            ("Z", "Z", "Mirror on the Z axis"),
+        ],
+        default="X",
     )
 
     bpy.types.Scene.simple_lattice_mirror_toggle = bpy.props.EnumProperty(
         name="Toggle",
         description="Toggle mirror",
-        items=[('OFF', 'OFF', 'Toggle mirror OFF'),
-               ('ON', 'ON', 'Toggle mirror ON')],
-        default='OFF'
+        items=[("OFF", "OFF", "Toggle mirror OFF"), ("ON", "ON", "Toggle mirror ON")],
+        default="OFF",
     )
 
     bpy.app.handlers.depsgraph_update_post.append(check_vertex_movement)
+
 
 def unregister():
     bpy.utils.unregister_class(SimpleLatticeMirrorPanel)
@@ -72,6 +75,7 @@ def unregister():
 
     del bpy.types.Scene.simple_lattice_mirror_axis
     del bpy.types.Scene.simple_lattice_mirror_toggle
+
 
 if __name__ == "__main__":
     register()
