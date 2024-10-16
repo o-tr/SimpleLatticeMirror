@@ -34,5 +34,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./simple_lattice_mirror.zip
-          asset_name: simple_lattice_mirror.zip
+          asset_name: simple_lattice_mirror_${{ github.ref }}.zip
           asset_content_type: application/zip
