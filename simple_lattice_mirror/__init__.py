@@ -156,18 +156,18 @@ def register():
 
     bpy.types.Scene.simple_lattice_mirror_axis = bpy.props.EnumProperty(
         name="Axis",
-        description="Axis to mirror symmetry on",
-        items=[('X', 'X', 'Symmetry on the X axis'),
-               ('Y', 'Y', 'Symmetry on the Y axis'),
-               ('Z', 'Z', 'Symmetry on the Z axis')],
+        description="Axis to mirror mirror on",
+        items=[('X', 'X', 'Mirror on the X axis'),
+               ('Y', 'Y', 'Mirror on the Y axis'),
+               ('Z', 'Z', 'Mirror on the Z axis')],
         default='X'
     )
 
     bpy.types.Scene.simple_lattice_mirror_toggle = bpy.props.EnumProperty(
         name="Toggle",
-        description="Toggle symmetry",
-        items=[('OFF', 'OFF', 'Toggle symmetry OFF'),
-               ('ON', 'ON', 'Toggle symmetry ON')],
+        description="Toggle mirror",
+        items=[('OFF', 'OFF', 'Toggle mirror OFF'),
+               ('ON', 'ON', 'Toggle mirror ON')],
         default='OFF'
     )
 
