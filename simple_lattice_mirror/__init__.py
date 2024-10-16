@@ -78,6 +78,7 @@ class SimpleLatticeMirrorPanel(bpy.types.Panel):
         layout.prop(
             context.scene, "simple_lattice_mirror_toggle", text="Toggle", expand=True
         )
+        register_handlers()
 
 
 def log(message) -> None:
@@ -220,6 +221,15 @@ def convert_to_symmetric_point(point: list[float], axis: str) -> list[float]:
         raise ValueError(f"Invalid axis: {axis}")
 
 
+def register_handlers():
+    if check_vertex_movement not in bpy.app.handlers.depsgraph_update_post:
+        bpy.app.handlers.depsgraph_update_post.append(check_vertex_movement)
+
+
+def load_post_handler(_):
+    register_handlers()
+
+
 def register():
     bpy.utils.register_class(SimpleLatticeMirrorPanel)
     bpy.utils.register_class(SimpleLatticeMirrorPreferences)
@@ -241,14 +251,15 @@ def register():
         items=[("OFF", "OFF", "Toggle mirror OFF"), ("ON", "ON", "Toggle mirror ON")],
         default="OFF",
     )
-
-    bpy.app.handlers.depsgraph_update_post.append(check_vertex_movement)
+    register_handlers()
+    bpy.app.handlers.load_post.append(load_post_handler)
 
 
 def unregister():
     bpy.utils.unregister_class(SimpleLatticeMirrorPanel)
     bpy.utils.unregister_class(SimpleLatticeMirrorPreferences)
 
+    bpy.app.handlers.load_post.remove(load_post_handler)
     bpy.app.handlers.depsgraph_update_post.remove(check_vertex_movement)
 
     del bpy.types.Scene.simple_lattice_mirror_axis
