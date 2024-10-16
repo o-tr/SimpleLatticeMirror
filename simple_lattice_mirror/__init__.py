@@ -41,7 +41,7 @@ class SimpleLatticeMirrorPreferences(bpy.types.AddonPreferences):
     Preferences for the Simple Lattice Mirror add-on.
     """
 
-    bl_idname = "simple_lattice_mirror"
+    bl_idname = __name__
 
     threshold: bpy.props.FloatProperty(
         name="Threshold",
@@ -81,7 +81,7 @@ class SimpleLatticeMirrorPanel(bpy.types.Panel):
 
 
 def log(message) -> None:
-    if not bpy.context.preferences.addons["simple_lattice_mirror"].preferences.debug:
+    if not bpy.context.preferences.addons[__name__].preferences.debug:
         return
     print(f"SimpleLatticeMirror: {message}")
 
@@ -167,23 +167,17 @@ def is_same_point(point1: list[float], point2: list[float]) -> bool:
         math.isclose(
             point1[0],
             point2[0],
-            abs_tol=bpy.context.preferences.addons[
-                "simple_lattice_mirror"
-            ].preferences.threshold,
+            abs_tol=bpy.context.preferences.addons[__name__].preferences.threshold,
         )
         and math.isclose(
             point1[1],
             point2[1],
-            abs_tol=bpy.context.preferences.addons[
-                "simple_lattice_mirror"
-            ].preferences.threshold,
+            abs_tol=bpy.context.preferences.addons[__name__].preferences.threshold,
         )
         and math.isclose(
             point1[2],
             point2[2],
-            abs_tol=bpy.context.preferences.addons[
-                "simple_lattice_mirror"
-            ].preferences.threshold,
+            abs_tol=bpy.context.preferences.addons[__name__].preferences.threshold,
         )
     )
 
