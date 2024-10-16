@@ -1,7 +1,9 @@
 import bpy
 
+from . import name
+
 class SimpleLatticeMirrorPreferences(bpy.types.AddonPreferences):
-    bl_idname = __name__
+    bl_idname = name
 
     threshold: bpy.props.FloatProperty(
         name="Threshold",

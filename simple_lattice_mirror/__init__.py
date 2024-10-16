@@ -39,6 +39,8 @@ from .main import check_vertex_movement
 from .SimpleLatticeMirrorPanel import SimpleLatticeMirrorPanel
 from .SimpleLatticeMirrorPreferences import SimpleLatticeMirrorPreferences
 
+name = __name__
+
 def register():
     bpy.utils.register_class(SimpleLatticeMirrorPanel)
     bpy.utils.register_class(SimpleLatticeMirrorPreferences)

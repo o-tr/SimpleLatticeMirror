@@ -1,9 +1,11 @@
 import math, bpy
 
+from . import name
+
 def is_same_point(point1: list[float], point2: list[float]) -> bool:
-    return math.isclose(point1[0], point2[0], abs_tol=bpy.context.preferences.addons[__name__].preferences.threshold) and \
-            math.isclose(point1[1], point2[1], abs_tol=bpy.context.preferences.addons[__name__].preferences.threshold) and \
-            math.isclose(point1[2], point2[2], abs_tol=bpy.context.preferences.addons[__name__].preferences.threshold)
+    return math.isclose(point1[0], point2[0], abs_tol=bpy.context.preferences.addons[name].preferences.threshold) and \
+            math.isclose(point1[1], point2[1], abs_tol=bpy.context.preferences.addons[name].preferences.threshold) and \
+            math.isclose(point1[2], point2[2], abs_tol=bpy.context.preferences.addons[name].preferences.threshold)
 
 def find_same_point(points: list[list[float]], target_point: list[float]) -> tuple[list[list[float]], list[int]]:
     result: list[list[float]] = []
