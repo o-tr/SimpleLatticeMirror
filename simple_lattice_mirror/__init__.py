@@ -25,7 +25,7 @@ SOFTWARE.
 bl_info = {
     "name": "Simple Lattice Mirror",
     "author": "ootr",
-    "version": (0, 0, 3),
+    "version": (0, 0, 4),
     "blender": (3, 0, 0),
     "location": "View3D > Tool Shelf > Item",
     "description": "Applies symmetry to the selected Lattice control points",
