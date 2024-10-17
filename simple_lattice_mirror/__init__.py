@@ -41,7 +41,7 @@ class SimpleLatticeMirrorPreferences(bpy.types.AddonPreferences):
     Preferences for the Simple Lattice Mirror add-on.
     """
 
-    bl_idname = __name__
+    bl_idname = "jp.ootr.simple_lattice_mirror.preferences"
 
     threshold: bpy.props.FloatProperty(
         name="Threshold",
@@ -61,7 +61,7 @@ class SimpleLatticeMirrorPreferences(bpy.types.AddonPreferences):
 
 class SimpleLatticeMirrorPanel(bpy.types.Panel):
     bl_label = "SimpleLatticeMirror"
-    bl_idname = "OBJECT_PT_SimpleLatticeMirror"
+    bl_idname = "jp.ootr.simple_lattice_mirror.panel"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
     bl_category = "Item"
