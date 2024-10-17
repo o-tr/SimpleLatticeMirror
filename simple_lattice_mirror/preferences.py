@@ -22,3 +22,11 @@ class SimpleLatticeMirrorPreferences(bpy.types.AddonPreferences):
         layout = self.layout
         layout.prop(self, "debug")
         layout.prop(self, "threshold")
+
+
+def get_threshold() -> float:
+    return bpy.context.preferences.addons[__package__].preferences.threshold
+
+
+def is_debug_enabled() -> bool:
+    return bpy.context.preferences.addons[__package__].preferences.debug
