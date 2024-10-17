@@ -35,7 +35,7 @@ bl_info = {
 
 import bpy
 
-from .preferences import SimpleLatticeMirrorPreferences
+from .preferences import register_preferences, unregister_preferences
 from .panel import SimpleLatticeMirrorPanel
 from .main import check_vertex_movement
 from .handler import register_handlers, load_post_handler
@@ -43,38 +43,17 @@ from .handler import register_handlers, load_post_handler
 
 def register():
     bpy.utils.register_class(SimpleLatticeMirrorPanel)
-    bpy.utils.register_class(SimpleLatticeMirrorPreferences)
-
-    bpy.types.Scene.simple_lattice_mirror_axis = bpy.props.EnumProperty(
-        name="Axis",
-        description="Axis to mirror mirror on",
-        items=[
-            ("X", "X", "Mirror on the X axis"),
-            ("Y", "Y", "Mirror on the Y axis"),
-            ("Z", "Z", "Mirror on the Z axis"),
-        ],
-        default="X",
-    )
-
-    bpy.types.Scene.simple_lattice_mirror_toggle = bpy.props.EnumProperty(
-        name="Toggle",
-        description="Toggle mirror",
-        items=[("OFF", "OFF", "Toggle mirror OFF"), ("ON", "ON", "Toggle mirror ON")],
-        default="OFF",
-    )
     register_handlers()
     bpy.app.handlers.load_post.append(load_post_handler)
+    register_preferences()
 
 
 def unregister():
     bpy.utils.unregister_class(SimpleLatticeMirrorPanel)
-    bpy.utils.unregister_class(SimpleLatticeMirrorPreferences)
 
     bpy.app.handlers.load_post.remove(load_post_handler)
     bpy.app.handlers.depsgraph_update_post.remove(check_vertex_movement)
-
-    del bpy.types.Scene.simple_lattice_mirror_axis
-    del bpy.types.Scene.simple_lattice_mirror_toggle
+    unregister_preferences()
 
 
 if __name__ == "__main__":

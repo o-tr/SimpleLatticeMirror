@@ -5,10 +5,11 @@ from .points import (
     convert_to_symmetric_point,
     find_symmetric_point,
 )
+from .preferences import get_toggle, get_axis
 
 
 def is_lattice_mirror_enabled() -> bool:
-    return bpy.context.scene.simple_lattice_mirror_toggle == "ON"
+    return get_toggle()
 
 
 def is_lattice_object(obj) -> bool:
@@ -32,7 +33,7 @@ def is_scene_updated(
         or (not hasattr(check_vertex_movement, "symmetric_map"))
         or len(check_vertex_movement.previous_positions) != len(points)
         or check_vertex_movement.previous_selections != selected_points
-        or check_vertex_movement.axis != scene.simple_lattice_mirror_axis
+        or check_vertex_movement.axis != get_axis()
     )
 
 
@@ -52,7 +53,7 @@ def apply_symmetry(
         log(f"Symmetric map: {check_vertex_movement.symmetric_map[i]}")
         for symmetric_index in check_vertex_movement.symmetric_map[i]:
             target_symmetric_point = convert_to_symmetric_point(
-                points[pointIndex], scene.simple_lattice_mirror_axis
+                points[pointIndex], get_axis()
             )
             target_deform = lattice.points[symmetric_index].co_deform
             target_deform[0] = target_symmetric_point[0]
@@ -73,10 +74,8 @@ def check_vertex_movement(scene) -> None:
         log("Initialize previous_positions")
         check_vertex_movement.previous_positions = points
         check_vertex_movement.previous_selections = selected_point_indexes
-        check_vertex_movement.axis = scene.simple_lattice_mirror_axis
-        check_vertex_movement.symmetric_map = find_symmetric_point(
-            lattice, scene.simple_lattice_mirror_axis
-        )
+        check_vertex_movement.axis = get_axis()
+        check_vertex_movement.symmetric_map = find_symmetric_point(lattice, get_axis())
 
     apply_symmetry(scene, lattice, selected_point_indexes, points)
 
