@@ -3,9 +3,7 @@ import bpy
 from .log import log
 from .points import (
     convert_to_symmetric_point,
-    find_same_point,
     find_symmetric_point,
-    is_same_point,
 )
 
 

@@ -6,7 +6,7 @@ class SimpleLatticeMirrorPreferences(bpy.types.AddonPreferences):
     Preferences for the Simple Lattice Mirror add-on.
     """
 
-    bl_idname = "jp.ootr.simple_lattice_mirror.preferences"
+    bl_idname = __package__
 
     threshold: bpy.props.FloatProperty(
         name="Threshold",

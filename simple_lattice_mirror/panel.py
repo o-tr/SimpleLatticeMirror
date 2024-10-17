@@ -1,9 +1,10 @@
 import bpy
+from .handler import register_handlers
 
 
 class SimpleLatticeMirrorPanel(bpy.types.Panel):
     bl_label = "SimpleLatticeMirror"
-    bl_idname = "jp.ootr.simple_lattice_mirror.panel"
+    bl_idname = "OBJECT_PT_simple_lattice_mirror"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
     bl_category = "Item"
