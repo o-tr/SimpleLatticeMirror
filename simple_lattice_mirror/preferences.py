@@ -60,8 +60,16 @@ def is_debug_enabled() -> bool:
     return bpy.context.preferences.addons[__package__].preferences.debug
 
 
+def get_axis_key() -> str:
+    return "simple_lattice_mirror_axis"
+
+
 def get_axis() -> str:
     return bpy.context.scene.simple_lattice_mirror_axis
+
+
+def get_toggle_key() -> str:
+    return "simple_lattice_mirror_toggle"
 
 
 def get_toggle() -> bool:

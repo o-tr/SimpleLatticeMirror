@@ -1,3 +1,7 @@
+from .preferences import register_preferences, unregister_preferences
+from .panel import register_panel, unregister_panel
+from .handler import register_handlers, unregister_handlers
+
 """
 MIT License
 
@@ -33,26 +37,16 @@ bl_info = {
     "license": "MIT",
 }
 
-import bpy
-
-from .preferences import register_preferences, unregister_preferences
-from .panel import SimpleLatticeMirrorPanel
-from .main import check_vertex_movement
-from .handler import register_handlers, load_post_handler
-
 
 def register():
-    bpy.utils.register_class(SimpleLatticeMirrorPanel)
+    register_panel()
     register_handlers()
-    bpy.app.handlers.load_post.append(load_post_handler)
     register_preferences()
 
 
 def unregister():
-    bpy.utils.unregister_class(SimpleLatticeMirrorPanel)
-
-    bpy.app.handlers.load_post.remove(load_post_handler)
-    bpy.app.handlers.depsgraph_update_post.remove(check_vertex_movement)
+    unregister_panel()
+    unregister_handlers()
     unregister_preferences()
 
 

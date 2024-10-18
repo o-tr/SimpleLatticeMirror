@@ -1,4 +1,5 @@
-import bpy, math
+import math
+import bpy
 
 from .preferences import get_threshold
 
