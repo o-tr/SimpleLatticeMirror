@@ -13,6 +13,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Copy license file
+        run: cp LICENSE simple_lattice_mirror/
+
       - name: Set version
         id: get_version
         run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
