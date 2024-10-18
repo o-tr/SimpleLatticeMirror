@@ -49,5 +49,4 @@ def unregister_panel():
     """
     Unregister the panel
     """
-    if SimpleLatticeMirrorPanel in bpy.types.Panel:
-        bpy.utils.unregister_class(SimpleLatticeMirrorPanel)
+    bpy.utils.unregister_class(SimpleLatticeMirrorPanel)
