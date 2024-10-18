@@ -65,6 +65,8 @@ def apply_symmetry(
         )
         log(f"Symmetric map: {tick.symmetric_map[i]}")
         for symmetric_index in tick.symmetric_map[i]:
+            if symmetric_index in selected_point_indexes:
+                continue
             target_symmetric_point = convert_to_symmetric_point(
                 points[pointIndex], get_axis()
             )
