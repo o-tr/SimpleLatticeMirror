@@ -19,12 +19,18 @@ class SimpleLatticeMirrorPreferences(bpy.types.AddonPreferences):
     )
 
     def draw(self, _) -> None:
+        """
+        Draw the preferences
+        """
         layout = self.layout
         layout.prop(self, "debug")
         layout.prop(self, "threshold")
 
 
 def register_preferences() -> None:
+    """
+    Register the preferences
+    """
     bpy.utils.register_class(SimpleLatticeMirrorPreferences)
 
     bpy.types.Scene.simple_lattice_mirror_axis = bpy.props.EnumProperty(
@@ -47,30 +53,51 @@ def register_preferences() -> None:
 
 
 def unregister_preferences() -> None:
+    """
+    Unregister the preferences
+    """
     bpy.utils.unregister_class(SimpleLatticeMirrorPreferences)
     del bpy.types.Scene.simple_lattice_mirror_axis
     del bpy.types.Scene.simple_lattice_mirror_toggle
 
 
 def get_threshold() -> float:
+    """
+    Get the threshold
+    """
     return bpy.context.preferences.addons[__package__].preferences.threshold
 
 
 def is_debug_enabled() -> bool:
+    """
+    Check if debug mode is enabled
+    """
     return bpy.context.preferences.addons[__package__].preferences.debug
 
 
 def get_axis_key() -> str:
+    """
+    Get the key for the axis
+    """
     return "simple_lattice_mirror_axis"
 
 
 def get_axis() -> str:
+    """
+    Get the axis
+    """
     return bpy.context.scene.simple_lattice_mirror_axis
 
 
 def get_toggle_key() -> str:
+    """
+    Get the key for the toggle
+    """
     return "simple_lattice_mirror_toggle"
 
 
 def get_toggle() -> bool:
+    """
+    Get the toggle
+    """
     return bpy.context.scene.simple_lattice_mirror_toggle == "ON"

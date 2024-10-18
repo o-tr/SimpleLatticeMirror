@@ -1,8 +1,6 @@
-from .preferences import register_preferences, unregister_preferences
-from .panel import register_panel, unregister_panel
-from .handler import register_handlers, unregister_handlers
-
 """
+Simple Lattice Mirror
+
 MIT License
 
 Copyright (c) 2024 ootr
@@ -26,6 +24,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
+from .preferences import register_preferences, unregister_preferences
+from .panel import register_panel, unregister_panel
+from .handler import register_handlers, unregister_handlers
+
+
 bl_info = {
     "name": "Simple Lattice Mirror",
     "author": "ootr",
@@ -39,12 +42,18 @@ bl_info = {
 
 
 def register():
+    """
+    register each module
+    """
     register_panel()
     register_handlers()
     register_preferences()
 
 
 def unregister():
+    """
+    unregister each module
+    """
     unregister_panel()
     unregister_handlers()
     unregister_preferences()

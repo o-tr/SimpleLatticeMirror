@@ -5,6 +5,9 @@ from .preferences import get_threshold
 
 
 def is_same_point(point1: list[float], point2: list[float]) -> bool:
+    """
+    Check if two points are the same
+    """
     return (
         math.isclose(
             point1[0],
@@ -27,6 +30,9 @@ def is_same_point(point1: list[float], point2: list[float]) -> bool:
 def find_same_point(
     points: list[list[float]], target_point: list[float]
 ) -> tuple[list[list[float]], list[int]]:
+    """
+    Find the same point in the list of points
+    """
     result: list[list[float]] = []
     indexes: list[int] = []
     for index, current_point in enumerate(points):
@@ -37,6 +43,9 @@ def find_same_point(
 
 
 def find_symmetric_point(lattice: bpy.types.Lattice, axis: str) -> dict[int, list[int]]:
+    """
+    Find the symmetric points
+    """
     selected_points = [
         [i[0], i[1], i[2]]
         for i in [p.co_deform.copy() for p in lattice.points if p.select]
@@ -52,6 +61,9 @@ def find_symmetric_point(lattice: bpy.types.Lattice, axis: str) -> dict[int, lis
 
 
 def convert_to_symmetric_point(point: list[float], axis: str) -> list[float]:
+    """
+    Convert the point to the symmetric point
+    """
     if axis == "X":
         return [-point[0], point[1], point[2]]
     elif axis == "Y":
